@@ -15,7 +15,15 @@ class CreditCard {
         $this->ccv = $_ccv;
     }
 
+    // public function checkExpirationDate() {
 
+    //     $second_date = $this->expirationDate;
+    //     $first_date = new DateTime('now');
+    //     $difference = $first_date->diff($second_date);
+    //     if($this->expirationDate > ){
+    //         echo  date_format($this->;, 'Y-m-d');
+    //     }
+    // }
     /**
      * Get the value of numbers
      */ 

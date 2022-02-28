@@ -1,26 +1,44 @@
 
 
-<?php 
+<?php
+
+use JetBrains\PhpStorm\Internal\ReturnTypeContract;
+
+require_once __DIR__ . "/food.php";
+require_once __DIR__ . "/toys.php";
+require_once __DIR__ . "/product.php";
+require_once __DIR__ . "/creditCard.php";
 
 class User {
     protected $name;
     protected $surname;
-    protected $registered;
+    protected $registered = false;
     protected $address;
     protected $cart = [];
     protected $creditCard;
     
-    public function __construct($_name, $_surname, $_registered, $_address, $_cart)
+    public function __construct($_name, $_surname, $_registered, $_address)
     {
         $this->name = $_name;
         $this->surname = $_surname;
         $this->registered = $_registered;
         $this->address = $_address;
-        $this->cart = $_cart;
     }
 
     public function addCreditCard($_numbers, $_expirationDate, $_ccv) {
        return $this->creditCard = new CreditCard($_numbers , $this->name,$_expirationDate, $_ccv );
+    }
+
+
+    public function isRegistered() {
+        if($this->registered){
+            return "Sconto applicato del 20%";
+        }
+        return "Nessun codice applicato";
+    }
+
+    public function addToCart($productToAdd){
+        return $this->cart = $productToAdd;
     }
 
     /**
@@ -125,4 +143,17 @@ class User {
 }
 
 
+$ossoFinto = new Toys("Osso", '34992230202ks', 'Cuccioli3', 39, "+2");
+
+$pincoPallino = new User("Alexander", "Perez", true, "Via Roma 12");
+
+$pincoPallino->addToCart($ossoFinto);
+
+echo $pincoPallino->isRegistered();
+
+$pincoPallino->addCreditCard("4333 1234 1548 4848", "20-12-1999", '313');
+
+echo var_dump($pincoPallino);
+
 ?>
+
